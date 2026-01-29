@@ -49,3 +49,6 @@ def authenticate_user(db: Session, email: str, password: str):
         "access_token": token,
         "token_type": "bearer"
     }
+
+def get_me_service(current_user):
+    return current_user

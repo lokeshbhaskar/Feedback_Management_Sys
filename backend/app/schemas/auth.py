@@ -19,3 +19,23 @@ class LoginRequest(BaseModel):
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
+
+
+from pydantic import BaseModel, EmailStr
+
+class CompanyResponse(BaseModel):
+    id: int
+    name: str
+
+    class Config:
+        from_attributes = True
+
+
+class MeResponse(BaseModel):
+    id: int
+    email: EmailStr
+    role: str
+    company: CompanyResponse
+
+    class Config:
+        from_attributes = True
