@@ -8,7 +8,7 @@ from app.controllers.auth_controller import get_me_controller, login_controller,
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
 @router.post(
-    "/signup",
+    "/signup-owner",
     response_model=OwnerSignupResponse,
     status_code=status.HTTP_201_CREATED
 )

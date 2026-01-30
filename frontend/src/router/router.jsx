@@ -6,6 +6,8 @@ import {
     redirect,
 } from "@tanstack/react-router";
 import LandingPage from "../pages/LandingPage";
+import Login from "../pages/Login";
+import OwnerSignup from "../pages/OwnerSignup";
 
 const auth = {
     isAuthenticated: () => !!localStorage.getItem("token"),
@@ -24,12 +26,18 @@ const landingPageRoute = createRoute({
 
 
 /* ---------- LOGIN ---------- */
-const Login = () => <div>Login Page</div>;
 
 const loginRoute = createRoute({
     getParentRoute: () => rootRoute,
     path: "/login",
     component: Login,
+});
+
+/* ---------- OWNER SIGNUP ---------- */
+const signupRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: "/signup",
+    component: OwnerSignup,
 });
 
 /* ---------- DASHBOARD (PROTECTED) ---------- */
@@ -50,6 +58,7 @@ const dashboardRoute = createRoute({
 const routeTree = rootRoute.addChildren([
     landingPageRoute,
     loginRoute,
+    signupRoute,
     dashboardRoute,
 ]);
 

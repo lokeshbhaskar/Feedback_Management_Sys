@@ -1,15 +1,16 @@
 from pydantic import BaseModel, EmailStr, Field
 
 class OwnerSignupRequest(BaseModel):
+    owner_name: str = Field(...,min_length=3)
     company_name: str = Field(...,min_length=3)
     email: EmailStr
     password: str = Field(...,min_length=4)
 
 class OwnerSignupResponse(BaseModel):
     id: int
+    owner_name: str
     email: EmailStr
-    company_id: int
-    role: str
+    role: str = "owner"
 
 
 class LoginRequest(BaseModel):
