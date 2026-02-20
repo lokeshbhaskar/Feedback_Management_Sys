@@ -15,7 +15,7 @@ const Login = () => {
   const loginMutation = useMutation({
     mutationFn: loginApi,
     onSuccess: (data) => {
-      localStorage.setItem("token", data.access_token);
+      localStorage.setItem("access_token", data.access_token);
       navigate({ to: "/dashboard" });
     },
     onError: (err) => {

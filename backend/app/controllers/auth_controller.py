@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session  # type: ignore
 from app.schemas.auth import LoginRequest, OwnerSignupRequest, OwnerSignupResponse
-from app.services.auth_service import authenticate_user, get_me_service, owner_signup_service
+from app.services.auth_service import authenticate_user, owner_signup_service
 
 def owner_signup_controller(db: Session, data: OwnerSignupRequest):
     user = owner_signup_service(db, data)
@@ -18,9 +18,16 @@ def login_controller(data: LoginRequest, db: Session):
     
 
 def get_me_controller(current_user):
+    company = None
+    if current_user.company:
+        company = {
+            "id": current_user.company.id,
+            "name": current_user.company.name,
+        }
+
     return {
         "id": current_user.id,
         "email": current_user.email,
-        "company_id": current_user.company_id,
-        "role": current_user.role
+        "role": current_user.role,
+        "company": company,
     }

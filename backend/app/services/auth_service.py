@@ -26,6 +26,7 @@ def owner_signup_service(db:Session, data):
 
         # 3 Create owner user
         user = User(
+            owner_name=data.owner_name,
             email=data.email,
             hashed_password=hash_password(data.password),
             role="owner",

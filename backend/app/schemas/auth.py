@@ -1,3 +1,4 @@
+from typing import Optional
 from pydantic import BaseModel, EmailStr, Field
 
 class OwnerSignupRequest(BaseModel):
@@ -22,8 +23,6 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
 
 
-from pydantic import BaseModel, EmailStr
-
 class CompanyResponse(BaseModel):
     id: int
     name: str
@@ -36,7 +35,7 @@ class MeResponse(BaseModel):
     id: int
     email: EmailStr
     role: str
-    company: CompanyResponse
+    company: Optional[CompanyResponse] = None
 
     class Config:
         from_attributes = True

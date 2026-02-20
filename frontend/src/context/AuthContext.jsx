@@ -13,14 +13,14 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const token = localStorage.getItem("access_token");
     if (token) {
-      fetchCurrentUser(token);
+      fetchCurrentUser();
     } else {
       setLoading(false);
     }
   }, []);
 
   // Fetch current user from /auth/me
-  const fetchCurrentUser = async (token) => {
+  const fetchCurrentUser = async () => {
     try {
       const res = await axiosInstance.get("/auth/me");
       setUser(res.data);
@@ -39,21 +39,17 @@ export const AuthProvider = ({ children }) => {
     localStorage.setItem("access_token", token);
 
     // Fetch user data
-    await fetchCurrentUser(token);
+    await fetchCurrentUser();
   };
 
   // Owner Signup function
-  const signupOwner = async (company_name, email, password) => {
-    const res = await axiosInstance.post("/auth/signup-owner", {
+  const signupOwner = async (owner_name, company_name, email, password) => {
+    return axiosInstance.post("/auth/signup-owner", {
+      owner_name,
       company_name,
       email,
       password,
     });
-    const token = res.data.access_token;
-    localStorage.setItem("access_token", token);
-
-    // Fetch user data
-    await fetchCurrentUser(token);
   };
 
   // Logout function

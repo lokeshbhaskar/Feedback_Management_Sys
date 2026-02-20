@@ -10,7 +10,7 @@ import Login from "../pages/Login";
 import OwnerSignup from "../pages/OwnerSignup";
 
 const auth = {
-    isAuthenticated: () => !!localStorage.getItem("token"),
+    isAuthenticated: () => !!localStorage.getItem("access_token"),
 };
 
 /* ---------- ROOT ---------- */
