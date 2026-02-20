@@ -8,6 +8,7 @@ import {
 import LandingPage from "../pages/LandingPage";
 import Login from "../pages/Login";
 import OwnerSignup from "../pages/OwnerSignup";
+import Dashboard from "../pages/Dashboard";
 
 const auth = {
     isAuthenticated: () => !!localStorage.getItem("access_token"),
@@ -39,9 +40,6 @@ const signupRoute = createRoute({
     path: "/signup",
     component: OwnerSignup,
 });
-
-/* ---------- DASHBOARD (PROTECTED) ---------- */
-const Dashboard = () => <div>Dashboard (Protected)</div>;
 
 const dashboardRoute = createRoute({
     getParentRoute: () => rootRoute,

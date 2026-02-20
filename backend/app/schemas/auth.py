@@ -33,6 +33,7 @@ class CompanyResponse(BaseModel):
 
 class MeResponse(BaseModel):
     id: int
+    owner_name: Optional[str] = None
     email: EmailStr
     role: str
     company: Optional[CompanyResponse] = None

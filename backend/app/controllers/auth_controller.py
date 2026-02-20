@@ -27,6 +27,7 @@ def get_me_controller(current_user):
 
     return {
         "id": current_user.id,
+        "owner_name": current_user.owner_name,
         "email": current_user.email,
         "role": current_user.role,
         "company": company,

@@ -122,6 +122,7 @@ class AuthServiceTests(unittest.TestCase):
         payload = get_me_controller(user)
 
         self.assertEqual(payload["email"], "dan@example.com")
+        self.assertEqual(payload["owner_name"], "Dan Owner")
         self.assertEqual(payload["role"], "owner")
         self.assertEqual(payload["company"]["name"], "Delta Co")
 
