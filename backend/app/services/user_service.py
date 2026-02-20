@@ -11,6 +11,7 @@ def create_user(db: Session, data: UserCreate ):
         raise HTTPException(status_code=400,detail="Email already registered")
     
     user = User(
+        owner_name = data.owner_name,
         email= data.email,
         hashed_password= hash_password(data.password),
         company_id = data.company_id,

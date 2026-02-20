@@ -7,9 +7,9 @@ import { signupOwner as signupApi } from "../services/authService";
 const OwnerSignup = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    ownerName: "",
-    companyName: "",
+    owner_name: "",
     email: "",
+    company_name: "",
     password: "",
   });
 
@@ -26,8 +26,8 @@ const OwnerSignup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (
-      !form.ownerName.trim() ||
-      !form.companyName.trim() ||
+      !form.owner_name.trim() ||
+      !form.company_name.trim() ||
       !form.email.trim() ||
       !form.password.trim()
     ) {
@@ -39,7 +39,6 @@ const OwnerSignup = () => {
   return (
     <div className="bg-slate-50 gradient-mesh min-h-screen flex items-center justify-center p-6">
       <div className="w-full max-w-md">
-        {/* Logo */}
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center space-x-2 mb-2">
             <div className="w-10 h-10 bg-linear-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
@@ -68,8 +67,8 @@ const OwnerSignup = () => {
               <input
                 type="text"
                 placeholder="John Doe"
-                value={form.ownerName}
-                onChange={(e) => setForm({ ...form, ownerName: e.target.value })}
+                value={form.owner_name}
+                onChange={(e) => setForm({ ...form, owner_name: e.target.value })}
                 className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl transition-all"
               />
             </div>
@@ -93,8 +92,8 @@ const OwnerSignup = () => {
               <input
                 type="text"
                 placeholder="Acme Inc."
-                value={form.companyName}
-                onChange={(e) => setForm({ ...form, companyName: e.target.value })}
+                value={form.company_name}
+                onChange={(e) => setForm({ ...form, company_name: e.target.value })}
                 className="w-full px-4 py-3 bg-slate-50 border border-slate-300 rounded-xl transition-all"
               />
               <p className="text-xs text-slate-500 mt-1">
@@ -117,25 +116,6 @@ const OwnerSignup = () => {
                 At least 8 characters
               </p>
             </div>
-
-            <div className="flex items-start gap-3">
-              <input
-                type="checkbox"
-                id="terms"
-                className="w-5 h-5 text-blue-600 border-slate-300 rounded mt-0.5"
-              />
-              <label htmlFor="terms" className="text-sm text-slate-600">
-                I agree to the{" "}
-                <span className="text-blue-600 font-medium cursor-pointer">
-                  Terms of Service
-                </span>{" "}
-                and{" "}
-                <span className="text-blue-600 font-medium cursor-pointer">
-                  Privacy Policy
-                </span>
-              </label>
-            </div>
-
             <button
               type="submit"
               disabled={signupMutation.isLoading}
@@ -158,13 +138,6 @@ const OwnerSignup = () => {
               Log in
             </Link>
           </p>
-        </div>
-
-        {/* Trust Badges */}
-        <div className="mt-8 flex items-center justify-center gap-6 text-xs text-slate-500">
-          <span>🔒 SSL Encrypted</span>
-          <span>🛡️ GDPR Compliant</span>
-          <span>✅ SOC 2 Certified</span>
         </div>
       </div>
     </div>
