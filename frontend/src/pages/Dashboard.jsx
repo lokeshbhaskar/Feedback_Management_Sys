@@ -139,13 +139,21 @@ export default function Dashboard() {
                 <span className="font-semibold">{companyName}</span>.
               </p>
             </div>
-            <Link
-              to="/feedback-form"
-              search={companyId ? { company_id: companyId } : undefined}
-              className="px-5 py-2.5 bg-linear-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:shadow-lg hover:shadow-blue-500/20 transition-all font-medium"
-            >
-              View Public Form
-            </Link>
+            <div className="flex items-center gap-3">
+              <Link
+                to="/"
+                className="px-5 py-2.5 bg-white border border-slate-300 text-slate-700 rounded-xl hover:bg-slate-50 transition-all font-medium"
+              >
+                Go to Homepage
+              </Link>
+              <Link
+                to="/feedback-form"
+                search={companyId ? { company_id: companyId } : undefined}
+                className="px-5 py-2.5 bg-linear-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:shadow-lg hover:shadow-blue-500/20 transition-all font-medium"
+              >
+                View Public Form
+              </Link>
+            </div>
           </div>
         </div>
 

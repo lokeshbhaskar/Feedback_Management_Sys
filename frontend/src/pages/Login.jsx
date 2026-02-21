@@ -2,10 +2,11 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { useMutation } from "@tanstack/react-query";
 import "../styles/login.css";
 import { useState } from "react";
-import { login as loginApi } from "../services/authService";
+import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [form, setForm] = useState({
     email: "",
@@ -13,9 +14,8 @@ const Login = () => {
   })
 
   const loginMutation = useMutation({
-    mutationFn: loginApi,
-    onSuccess: (data) => {
-      localStorage.setItem("access_token", data.access_token);
+    mutationFn: ({ email, password }) => login(email, password),
+    onSuccess: () => {
       navigate({ to: "/dashboard" });
     },
     onError: (err) => {
