@@ -1,7 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database.postgresql import engine, Base
-from app.routers import user , auth
+from app import models  # noqa: F401
+from app.routers import user, auth, feedback
 
 app = FastAPI(title="Feedback System")
 
@@ -27,3 +28,4 @@ def root():
 
 app.include_router(auth.router)
 app.include_router(user.router)
+app.include_router(feedback.router)

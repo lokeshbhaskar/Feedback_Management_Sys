@@ -43,6 +43,7 @@ export default function Dashboard() {
   const ownerName = data?.owner_name || data?.email?.split("@")[0] || "Owner";
   const ownerEmail = data?.email || "owner@example.com";
   const companyName = data?.company?.name || "Workspace";
+  const companyId = data?.company?.id;
   const ownerRole = (data?.role || "owner").toUpperCase();
 
   if (isLoading) {
@@ -101,9 +102,9 @@ export default function Dashboard() {
             <Link to="/dashboard" className="flex items-center gap-3 px-4 py-3 bg-blue-50 text-blue-700 rounded-xl font-medium">
               Dashboard
             </Link>
-            <button className="w-full text-left px-4 py-3 text-slate-500 rounded-xl bg-slate-50 cursor-not-allowed">
-              Feedback (coming soon)
-            </button>
+            <Link to="/feedback-list" className="flex items-center gap-3 px-4 py-3 text-slate-700 rounded-xl hover:bg-slate-100 font-medium">
+              Feedback List
+            </Link>
             <button className="w-full text-left px-4 py-3 text-slate-500 rounded-xl bg-slate-50 cursor-not-allowed">
               Analytics (coming soon)
             </button>
@@ -139,10 +140,11 @@ export default function Dashboard() {
               </p>
             </div>
             <Link
-              to="/"
+              to="/feedback-form"
+              search={companyId ? { company_id: companyId } : undefined}
               className="px-5 py-2.5 bg-linear-to-r from-blue-600 to-indigo-600 text-white rounded-xl hover:shadow-lg hover:shadow-blue-500/20 transition-all font-medium"
             >
-              View Public Site
+              View Public Form
             </Link>
           </div>
         </div>

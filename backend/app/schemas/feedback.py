@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from datetime import datetime
 
 class FeedbackCreate(BaseModel):
@@ -15,3 +15,19 @@ class FeedbackResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class FeedbackListItem(BaseModel):
+    id: int
+    category: str
+    name: str | None = None
+    email: str | None = None
+    message: str
+    rating: int | None = None
+    archived: bool = False
+    reply_text: str | None = None
+    created_at: datetime
+
+
+class ReplyRequest(BaseModel):
+    reply_text: str = Field(..., min_length=1)
