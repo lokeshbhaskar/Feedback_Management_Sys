@@ -1,17 +1,18 @@
 from sqlalchemy.orm import Session  # type: ignore
 
 from app.schemas.feedback import ReplyRequest
-from app.schemas.public import PublicFeedbackCreate
-from app.services.feedback_service import (
-    archive_feedback,
-    create_public_feedback,
-    list_company_feedback,
-    reply_feedback,
-)
+from app.schemas.public import IngestFeedbackCreate, PublicFeedbackCreate
+from app.services.feedback_service import FeedbackService
 
 
 def create_public_feedback_controller(db: Session, data: PublicFeedbackCreate):
-    return create_public_feedback(db, data)
+    service = FeedbackService(db)
+    return service.create_public_feedback(data)
+
+
+def create_ingest_feedback_controller(db: Session, data: IngestFeedbackCreate, api_key):
+    service = FeedbackService(db)
+    return service.create_ingest_feedback(data, api_key)
 
 
 def list_company_feedback_controller(
@@ -22,11 +23,13 @@ def list_company_feedback_controller(
     rating: int | None = None,
     include_archived: bool = False,
 ):
-    return list_company_feedback(db, company_id, search, category, rating, include_archived)
+    service = FeedbackService(db)
+    return service.list_company_feedback(company_id, search, category, rating, include_archived)
 
 
 def archive_feedback_controller(db: Session, company_id: int, feedback_id: int):
-    return archive_feedback(db, company_id, feedback_id)
+    service = FeedbackService(db)
+    return service.archive_feedback(company_id, feedback_id)
 
 
 def reply_feedback_controller(
@@ -35,4 +38,5 @@ def reply_feedback_controller(
     feedback_id: int,
     payload: ReplyRequest,
 ):
-    return reply_feedback(db, company_id, feedback_id, payload.reply_text)
+    service = FeedbackService(db)
+    return service.reply_feedback(company_id, feedback_id, payload.reply_text)

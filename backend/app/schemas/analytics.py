@@ -1,7 +1,26 @@
 from pydantic import BaseModel
 
-class FeedbackAnalytics(BaseModel):
-    total_feedbacks: int
-    average_rating: float | None
-    positive_count: int
-    negative_count: int
+
+class AnalyticsCategoryItem(BaseModel):
+    category: str
+    count: int
+
+
+class AnalyticsRatingItem(BaseModel):
+    star: int
+    count: int
+
+
+class AnalyticsTrendItem(BaseModel):
+    date: str
+    count: int
+
+
+class AnalyticsSummaryResponse(BaseModel):
+    total: int
+    archived: int
+    avg_rating: float
+    response_rate: int
+    categories: list[AnalyticsCategoryItem]
+    ratings: list[AnalyticsRatingItem]
+    trend: list[AnalyticsTrendItem]

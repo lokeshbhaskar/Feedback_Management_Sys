@@ -18,3 +18,12 @@ class UserResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+class UpdatePasswordRequest(BaseModel):
+    current_password: str
+    new_password: str
+
+
+class BasicMessageResponse(BaseModel):
+    detail: str

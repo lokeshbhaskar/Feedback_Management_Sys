@@ -11,6 +11,10 @@ import OwnerSignup from "../pages/OwnerSignup";
 import Dashboard from "../pages/Dashboard";
 import FeedbackForm from "../pages/FeedbackForm";
 import FeedbackList from "../pages/FeedbackList";
+import SettingsPage from "../pages/SettingsPage";
+import Analytics from "../pages/Analytics";
+import Team from "../pages/Team";
+import IntegrationsDocs from "../pages/IntegrationsDocs";
 
 const auth = {
     isAuthenticated: () => !!localStorage.getItem("access_token"),
@@ -74,6 +78,50 @@ const feedbackListRoute = createRoute({
     component: FeedbackList,
 });
 
+const settingsRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: "/settings",
+    beforeLoad: () => {
+        if (!auth.isAuthenticated()) {
+            throw redirect({ to: "/login" });
+        }
+    },
+    component: SettingsPage,
+});
+
+const analyticsRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: "/analytics",
+    beforeLoad: () => {
+        if (!auth.isAuthenticated()) {
+            throw redirect({ to: "/login" });
+        }
+    },
+    component: Analytics,
+});
+
+const teamRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: "/team",
+    beforeLoad: () => {
+        if (!auth.isAuthenticated()) {
+            throw redirect({ to: "/login" });
+        }
+    },
+    component: Team,
+});
+
+const integrationsRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: "/integrations",
+    beforeLoad: () => {
+        if (!auth.isAuthenticated()) {
+            throw redirect({ to: "/login" });
+        }
+    },
+    component: IntegrationsDocs,
+});
+
 /* ---------- ROUTER ---------- */
 const routeTree = rootRoute.addChildren([
     landingPageRoute,
@@ -82,6 +130,10 @@ const routeTree = rootRoute.addChildren([
     dashboardRoute,
     feedbackFormRoute,
     feedbackListRoute,
+    analyticsRoute,
+    teamRoute,
+    integrationsRoute,
+    settingsRoute,
 ]);
 
 const AppRouter = createRouter({ routeTree });

@@ -13,5 +13,6 @@ class Company(Base):
 
     # Relationships
     users = relationship("User", back_populates="company")
+    teams = relationship("Team", back_populates="company")
     api_keys = relationship("APIKey", back_populates="company")
     feedbacks = relationship("Feedback", back_populates="company")

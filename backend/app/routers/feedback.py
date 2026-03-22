@@ -7,14 +7,16 @@ from sqlalchemy.orm import Session  # type: ignore
 
 from app.controllers.feedback_controller import (
     archive_feedback_controller,
+    create_ingest_feedback_controller,
     create_public_feedback_controller,
     list_company_feedback_controller,
     reply_feedback_controller,
 )
 from app.database.postgresql import get_db
+from app.dependencies.api_key import get_current_api_key
 from app.dependencies.auth import get_current_user
 from app.schemas.feedback import FeedbackListItem, FeedbackResponse, ReplyRequest
-from app.schemas.public import PublicFeedbackCreate
+from app.schemas.public import IngestFeedbackCreate, PublicFeedbackCreate
 
 router = APIRouter(prefix="/feedback", tags=["Feedback"])
 
@@ -22,6 +24,15 @@ router = APIRouter(prefix="/feedback", tags=["Feedback"])
 @router.post("/public", response_model=FeedbackResponse, status_code=status.HTTP_201_CREATED)
 def create_public_feedback(data: PublicFeedbackCreate, db: Session = Depends(get_db)):
     return create_public_feedback_controller(db, data)
+
+
+@router.post("/ingest", response_model=FeedbackResponse, status_code=status.HTTP_201_CREATED)
+def create_ingest_feedback(
+    data: IngestFeedbackCreate,
+    db: Session = Depends(get_db),
+    current_api_key=Depends(get_current_api_key),
+):
+    return create_ingest_feedback_controller(db, data, current_api_key)
 
 
 @router.get("", response_model=list[FeedbackListItem])
